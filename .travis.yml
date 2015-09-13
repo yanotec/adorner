@@ -1,0 +1,39 @@
+language: ruby
+
+rvm:
+  - 1.9.3
+  - 2.0.0
+  - 2.1
+  - 2.2
+
+gemfile:
+  - gemfiles/Gemfile.rails-4.2-stable
+  - gemfiles/Gemfile.rails-4.1-stable
+  - gemfiles/Gemfile.rails-4.0-stable
+  - gemfiles/Gemfile.rails-3.2-stable
+  - gemfiles/Gemfile.rails-3.1-stable
+  - gemfiles/Gemfile.rails-3.0-stable
+  - Gemfile
+
+matrix:
+  exclude:
+    - rvm: 2.2
+      gemfile: gemfiles/Gemfile.rails-3.0-stable
+
+    - rvm: 2.2
+      gemfile: gemfiles/Gemfile.rails-3.1-stable
+
+    - rvm: 2.2
+      gemfile: gemfiles/Gemfile.rails-3.2-stable
+
+sudo: false
+
+cache: bundler
+
+script: bundle exec rake rspec
+
+before_install: 
+  - "gem install bundler -v 1.10.6"
+  - "rm ${BUNDLE_GEMFILE}.lock"
+
+before_script: "bundle update"
