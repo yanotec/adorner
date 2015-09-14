@@ -1,3 +1,4 @@
+require "active_support/all"
 require "adorner/version"
 require "adorner/base"
 
